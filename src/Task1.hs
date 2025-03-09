@@ -1,5 +1,7 @@
 module Task1 where
 
+import Data.List (group)
+
 -- | Compresses given data using run-length encoding.
 --
 -- Usage example:
@@ -12,7 +14,7 @@ module Task1 where
 -- []
 --
 encode :: Eq a => [a] -> [(Int, a)]
-encode = error "TODO: define encode"
+encode xs = [(length x, head x) | x <- group xs]
 
 -- | Decompresses given data using run-length decoding.
 --
@@ -26,7 +28,7 @@ encode = error "TODO: define encode"
 -- []
 --
 decode :: [(Int, a)] -> [a]
-decode = error "TODO: define decode"
+decode xs = concat [replicate n x | (n,x) <- xs]
 
 -- | Rotates given finite list to the left for a given amount N
 --
@@ -46,4 +48,5 @@ decode = error "TODO: define decode"
 -- ""
 --
 rotate :: Int -> [a] -> [a]
-rotate = error "TODO: define rotate"
+rotate _ [] = []
+rotate n xs = drop m xs ++ take m xs where m = mod n (length xs)
